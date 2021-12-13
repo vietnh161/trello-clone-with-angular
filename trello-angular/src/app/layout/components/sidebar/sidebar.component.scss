@@ -1,0 +1,24 @@
+:host {
+  .sidebar {
+    width: 240px;
+    .sidebar-item {
+      height: 32px;
+      margin-bottom: 4px;
+      border-radius: 4px;
+      font-size: 18px;
+      padding-left: 8px;
+      font-weight: 700;
+      color: #1f1f1f;
+      background-color: #ffffff;
+      display: flex;
+      align-items: center;
+      &:hover {
+        background-color: rgba(9, 30, 66, 0.08);
+      }
+    }
+    .active {
+      color: #172b4d !important;
+      background-color: #e4f0f6 !important;
+    }
+  }
+}

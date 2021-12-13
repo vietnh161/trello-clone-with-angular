@@ -1,0 +1,13 @@
+<div class="sidebar">
+  <!-- <div></div> -->
+
+  <a
+    *ngFor="let item of sidebarItems"
+    class="sidebar-item"
+    [class.active]="item === sidebarSelected"
+    [routerLink]="item.link"
+    (click)="setSidebar(item)"
+  >
+    {{ item.title }}</a
+  >
+</div>

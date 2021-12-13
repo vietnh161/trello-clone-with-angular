@@ -1,0 +1,123 @@
+// Khai báo kích thước tương ứng với màn hình thiết bị
+
+$XS: 768px;
+$SM: 992px;
+$MD: 1200px;
+$LG: 1400px;
+// media queries
+
+@mixin Responsive($canvas) {
+    @if $canvas == XS {
+        @media only screen and (max-width: $XS) {
+            @content;
+        }
+    } @else if $canvas == SM {
+        @media only screen and (min-width: $XS) and (max-width: $SM) {
+            @content;
+        }
+    } @else if $canvas == MD {
+        @media only screen and (min-width: $SM) and (max-width: $MD) {
+            @content;
+        }
+    } @else if $canvas == LG {
+        @media only screen and (min-width: $MD) and (max-width: $LG) {
+            @content;
+        }
+    } @else if $canvas == XL {
+        @media only screen and (min-width: $LG) {
+            @content;
+        }
+    }
+}
+
+// tạo class tự động cắt sau một số dòng
+@mixin generate-class-line-clamp() {
+    @for $i from 1 through 20 {
+        .line-clamp-#{$i} {
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: #{$i};
+            -webkit-box-orient: vertical;
+        }
+    }
+}
+@include generate-class-line-clamp();
+// #endgion
+
+// class margin
+@mixin generate-class-margin-left() {
+    @for $i from 1 through 40 {
+        .m-l-#{$i} {
+            margin-left: #{$i + "px"};
+        }
+    }
+}
+@include generate-class-margin-left();
+
+@mixin generate-class-margin-right() {
+    @for $i from 1 through 40 {
+        .m-r-#{$i} {
+            margin-right: #{$i + "px"};
+        }
+    }
+}
+@include generate-class-margin-right();
+
+@mixin generate-class-margin-top() {
+    @for $i from 1 through 40 {
+        .m-t-#{$i} {
+            margin-top: #{$i + "px"};
+        }
+    }
+}
+@include generate-class-margin-top();
+
+@mixin generate-class-margin-bottom() {
+    @for $i from 1 through 40 {
+        .m-b-#{$i} {
+            margin-bottom: #{$i + "px"};
+        }
+    }
+}
+@include generate-class-margin-bottom();
+@mixin generate-class-padding-left() {
+    @for $i from 1 through 40 {
+        .p-l-#{$i} {
+            padding-left: #{$i + "px"};
+        }
+    }
+}
+@include generate-class-padding-left();
+@mixin generate-class-padding-right() {
+    @for $i from 1 through 40 {
+        .p-r-#{$i} {
+            padding-right: #{$i + "px"};
+        }
+    }
+}
+@include generate-class-padding-right();
+@mixin generate-class-padding-top() {
+    @for $i from 1 through 40 {
+        .p-t-#{$i} {
+            padding-top: #{$i + "px"};
+        }
+    }
+}
+@include generate-class-padding-top();
+@mixin generate-class-padding-bottom() {
+    @for $i from 1 through 40 {
+        .p-b-#{$i} {
+            padding-bottom: #{$i + "px"};
+        }
+    }
+}
+@include generate-class-padding-bottom();
+// #endgion
+
+@mixin overlay() {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
