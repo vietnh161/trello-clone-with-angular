@@ -1,7 +1,10 @@
 <div class="header">
-    <div class="left">
-        <div class="home">
-            <!-- <mat-icon aria-hidden="false" aria-label="Example home icon" >home</mat-icon> -->
+    <div class="left d-flex align-items-center">
+        <div class="home me-2 ms-1 flex-center">
+            <mat-icon>home</mat-icon>
+        </div>
+        <div *ngIf="(currentScreenSize$ | async ) == 'mobile'" class="menu-sidebar flex-center">
+            <mat-icon>list</mat-icon>
         </div>
     </div>
     <div class="middle">

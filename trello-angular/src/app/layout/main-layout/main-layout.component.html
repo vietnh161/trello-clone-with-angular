@@ -1,6 +1,6 @@
 <app-header></app-header>
 <div class="main-layout container mt-4">
-    <div>
+    <div *ngIf="deviceScreen != 'mobile'">
         <app-sidebar [sidebarItems]="sidebarItems"></app-sidebar>
     </div>
     <div class="container-fluid">
