@@ -1,34 +1,3 @@
-// Khai báo kích thước tương ứng với màn hình thiết bị
-
-$XS: 768px;
-$SM: 992px;
-$MD: 1200px;
-$LG: 1400px;
-// media queries
-
-@mixin Responsive($canvas) {
-    @if $canvas == XS {
-        @media only screen and (max-width: $XS) {
-            @content;
-        }
-    } @else if $canvas == SM {
-        @media only screen and (min-width: $XS) and (max-width: $SM) {
-            @content;
-        }
-    } @else if $canvas == MD {
-        @media only screen and (min-width: $SM) and (max-width: $MD) {
-            @content;
-        }
-    } @else if $canvas == LG {
-        @media only screen and (min-width: $MD) and (max-width: $LG) {
-            @content;
-        }
-    } @else if $canvas == XL {
-        @media only screen and (min-width: $LG) {
-            @content;
-        }
-    }
-}
 
 // tạo class tự động cắt sau một số dòng
 @mixin generate-class-line-clamp() {

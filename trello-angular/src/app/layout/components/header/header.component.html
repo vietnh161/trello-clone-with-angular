@@ -1,17 +1,33 @@
 <div class="header">
-    <div class="left d-flex align-items-center">
-        <div class="home me-2 ms-1 flex-center">
-            <mat-icon>home</mat-icon>
-        </div>
-        <div *ngIf="(currentScreenSize$ | async ) == 'mobile'" class="menu-sidebar flex-center">
-            <mat-icon>list</mat-icon>
-        </div>
-    </div>
-    <div class="middle">
-        Trello
-    </div>
-    <div class="right">
-        <div class="notify"></div>
-        <div class="user-management">NV</div>
-    </div>
+  <div class="left d-flex align-items-center">
+    <!-- home -->
+    <div class="app-name">Trello</div>
+
+    <!-- mobile sidebar -->
+    <button
+      *ngIf="currentScreenSize == 'Small'"
+      mat-icon-button
+      class="menu-sidebar flex-center"
+      [matMenuTriggerFor]="menu"
+    >
+      <mat-icon>list</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <a
+        *ngFor="let item of sidebarItems"
+        mat-menu-item
+        class="sidebar-item"
+        [class.active]="item === sidebarSelected"
+        [routerLink]="item.link"
+      >
+        {{ item.title }}</a
+      >
+    </mat-menu>
+
+
+  </div>
+  <div class="right">
+    <div class="notify"></div>
+    <div class="user-management">NV</div>
+  </div>
 </div>

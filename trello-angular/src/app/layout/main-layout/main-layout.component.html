@@ -1,11 +1,17 @@
-<app-header></app-header>
-<div class="main-layout container mt-4">
-    <div *ngIf="deviceScreen != 'mobile'">
-        <app-sidebar [sidebarItems]="sidebarItems"></app-sidebar>
-    </div>
-    <div class="container-fluid">
-        <router-outlet></router-outlet>
-    </div>
-
+<app-header [sidebarItems]="sidebarItems"></app-header>
+<div
+  class="main-layout mt-4 {{
+    currentScreenSize == 'Small' ? 'container-fluid' : 'container'
+  }}"
+>
+  <div *ngIf="currentScreenSize != 'Small'">
+    <app-sidebar [sidebarItems]="sidebarItems"></app-sidebar>
+  </div>
+  <div
+    class="{{ currentScreenSize == 'Small' ? 'container-fluid' : 'container' }}"
+    [class.container-fluid]="currentScreenSize == 'Small'"
+  >
+    <router-outlet></router-outlet>
+  </div>
 </div>
 <!-- <app-footer> -->

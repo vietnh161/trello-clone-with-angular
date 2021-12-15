@@ -1,0 +1,22 @@
+// Khai báo kích thước tương ứng với màn hình thiết bị
+
+$MD: 768px;
+$LG: 1200px;
+$XL: 1400px;
+// media queries
+
+@mixin Responsive($canvas) {
+    @if $canvas == SM {
+        @media only screen and (max-width: #{$MD - 1px}) {
+            @content;
+        }
+    } @else if $canvas == MD {
+        @media only screen and (max-width: #{$LG - 1px}) {
+            @content;
+        }
+    } @else if $canvas == LG {
+        @media only screen and (max-width: #{$XL - 1px}) {
+            @content;
+        }
+    }
+}

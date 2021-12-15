@@ -1,6 +1,13 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { filter, fromEvent, map, startWith } from 'rxjs';
-import { DeviceScreenType } from 'src/app/models/comon-model';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  NavigationStart,
+  Router,
+} from '@angular/router';
+import { filter, fromEvent, map, of, startWith, switchMap } from 'rxjs';
+import { getDeviceScreenFromWindowWidth } from 'src/app/common/common-function';
+import { DeviceScreenType, SideBarItem } from 'src/app/models/comon-model';
 import { LayoutService } from 'src/app/services/layout-service';
 
 @Component({
@@ -9,12 +16,11 @@ import { LayoutService } from 'src/app/services/layout-service';
   styleUrls: ['./main-layout.component.scss'],
 })
 export class MainLayoutComponent implements OnInit {
-  sidebarItems = [
+  sidebarItems: SideBarItem[] = [
     {
       title: 'Boards',
       icon: 'shopping-cart-outline',
       link: '/board',
-      home: true,
     },
     {
       title: 'Templates',
@@ -23,43 +29,52 @@ export class MainLayoutComponent implements OnInit {
     },
     {
       title: 'Workspaces',
+      icon: 'home-outline',
+      link: '',
       group: true,
     },
   ];
 
   innerWidth: number = 0;
-  deviceScreen: DeviceScreenType = null;
-  constructor(private layoutService: LayoutService) {
+  currentScreenSize: DeviceScreenType = null;
+  constructor(
+    private layoutService: LayoutService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: any) => {
+        const item = this.sidebarItems.find((x) => x.link === event.url);
+        if (item) {
+          this.layoutService.activeSidebar$.next(item);
+        }
+      });
   }
 
-  ngOnInit() { 
-    this.layoutService.currentScreenSize$.subscribe((type) => {
-      if (type) {
-        this.deviceScreen = type;
-      }
-    });
-
+  ngOnInit() {
+    console.log('Init MainLayoutComponent');
     this.checkDeviceScreen();
   }
 
   checkDeviceScreen() {
-    // this.layoutService.currentScreenSize$.subscribe((type) => {
-    //   if (type) {
-    //     this.deviceScreen = type;
-    //   }
-    // });
+    this.layoutService.currentScreenSize$.subscribe((type) => {
+      if (type) {
+        this.currentScreenSize = type;
+      }
+    });
 
-   
-  }
-
-  getDeviceScreenFromWindowWidth() {
-    this.innerWidth = window.innerWidth;
-    if (this.innerWidth < 768) {
-      this.layoutService.currentScreenSize$.next('mobile');
-    } else if (this.innerWidth < 1200) {
-      this.layoutService.currentScreenSize$.next('tablet');
-    } else {
-      this.layoutService.currentScreenSize$.next('desktop');
-    }
+    fromEvent(window, 'resize')
+      .pipe(
+        startWith({ target: { innerWidth: window.innerWidth } }),
+        map((event) => (event.target as Window).innerWidth),
+        filter((w: any) => w != this.innerWidth)
+      )
+      .subscribe((evt) => {
+        this.innerWidth = window.innerWidth;
+        this.layoutService.currentScreenSize$.next(
+          getDeviceScreenFromWindowWidth(this.innerWidth)
+        );
+      });
   }
 }
