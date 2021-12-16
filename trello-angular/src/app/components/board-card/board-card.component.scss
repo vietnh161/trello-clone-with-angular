@@ -1,0 +1,22 @@
+.board-card {
+  height: 96px;
+  border-radius: 3px;
+  padding: 8px;
+  .board-card-title {
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .board-card-is-template{
+    display: inline;
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.69);
+    padding: 3px 8px;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 16px;
+    align-items: center;
+    color: #172B4D;
+    width: fit-content;
+  }
+}

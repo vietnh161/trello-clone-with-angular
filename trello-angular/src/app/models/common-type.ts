@@ -1,0 +1,1 @@
+export type DeviceScreenType = 'Small' | 'Medium' | 'Large' | 'X-Large' | null;

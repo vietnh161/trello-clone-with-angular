@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BoardDetailLayoutModule } from './layout/boad-detail-layout/boad-detail-layout.module';
 import { MainLayoutModule } from './layout/main-layout/main-layout.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     MainLayoutModule,

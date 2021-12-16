@@ -1,4 +1,4 @@
-import { DeviceScreenType } from "../models/comon-model";
+import { DeviceScreenType } from "../models/common-type";
 
 export function getDeviceScreenFromWindowWidth(width: number): DeviceScreenType {
     if (width < 768) {

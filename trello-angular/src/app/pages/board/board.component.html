@@ -1,1 +1,24 @@
-<p>{{currentScreenSize}}</p>
+<div class="board-view w-100">
+  <div class="template">
+    <h2>Template</h2>
+    <div class="row g-1 g-md-2 g-xl-3">
+      <div
+        *ngFor="let template of listTemplateBoard"
+        class="app-board-card col-6 col-md-4 col-xl-3"
+      >
+        <app-board-card [boardData]="template"></app-board-card>
+      </div>
+    </div>
+  </div>
+  <div class="recently-viewed">
+    <h2>Recently Viewed</h2>
+    <div class="row g-1 g-md-2 g-xl-3">
+      <div
+        *ngFor="let board of listRecentBoard"
+        class="app-board-card col-6 col-md-4 col-xl-3"
+      >
+        <app-board-card [boardData]="board"></app-board-card>
+      </div>
+    </div>
+  </div>
+</div>

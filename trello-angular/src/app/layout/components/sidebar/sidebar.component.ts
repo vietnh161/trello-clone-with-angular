@@ -11,16 +11,16 @@ export class SidebarComponent implements OnInit {
   @Input() sidebarItems: any[] = [];
   sidebarSelected: any;
   constructor(private layoutService: LayoutService) {
-    this.layoutService.activeSidebar$.subscribe((sidebar :SideBarItem) => {
-      this.setSidebar(sidebar)
-    });
+    
   }
 
   ngOnInit() {
-    const item = this.sidebarItems.find((x) => x.link === location.pathname);
-    if (item) {
-      this.layoutService.activeSidebar$.next(item);
-    }
+    this.layoutService.activeSidebar$.subscribe((path) => {
+      const item = this.sidebarItems.find((x) => x.link === path);
+      if (item) {
+        this.setSidebar(item);
+      }
+    });
   }
 
   setSidebar(sidebar: any) {

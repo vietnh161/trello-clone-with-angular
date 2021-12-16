@@ -1,0 +1,11 @@
+<ng-container *ngIf="boardData">
+  <div #boardCard class="board-card">
+    <div *ngIf="boardData.IsTemplate" class="board-card-is-template">
+      Template
+    </div>
+    <div class="board-card-title line-clamp-2">
+      {{ boardData.Title }}
+    </div>
+    <div class="board-card-star"></div>
+  </div>
+</ng-container>

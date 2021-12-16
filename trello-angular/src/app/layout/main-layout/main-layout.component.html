@@ -8,8 +8,7 @@
     <app-sidebar [sidebarItems]="sidebarItems"></app-sidebar>
   </div>
   <div
-    class="{{ currentScreenSize == 'Small' ? 'container-fluid' : 'container' }}"
-    [class.container-fluid]="currentScreenSize == 'Small'"
+    class="{{ currentScreenSize == 'Small' ? 'w-100' : 'container' }}"
   >
     <router-outlet></router-outlet>
   </div>

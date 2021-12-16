@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
-import { DeviceScreenType } from 'src/app/models/comon-model';
+import { distinctUntilChanged, Subject } from 'rxjs';
+import { DeviceScreenType } from 'src/app/models/common-type';
 import { LayoutService } from 'src/app/services/layout-service';
 
 @Component({
@@ -13,13 +13,12 @@ export class HeaderComponent implements OnInit {
   sidebarSelected: any;
   currentScreenSize: DeviceScreenType = null;
   constructor(private layoutService: LayoutService) {
-    this.layoutService.currentScreenSize$.subscribe((type) => {
-      this.currentScreenSize = type;
-    });
+    
   }
 
   ngOnInit() {
-
-    
+    this.layoutService.getCurrentScreenSize().subscribe((type) => {
+      this.currentScreenSize = type;
+    });
   }
 }

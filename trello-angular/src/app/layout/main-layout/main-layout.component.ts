@@ -7,7 +7,8 @@ import {
 } from '@angular/router';
 import { filter, fromEvent, map, of, startWith, switchMap } from 'rxjs';
 import { getDeviceScreenFromWindowWidth } from 'src/app/common/common-function';
-import { DeviceScreenType, SideBarItem } from 'src/app/models/comon-model';
+import { DeviceScreenType } from 'src/app/models/common-type';
+import {  SideBarItem } from 'src/app/models/comon-model';
 import { LayoutService } from 'src/app/services/layout-service';
 
 @Component({
@@ -45,10 +46,7 @@ export class MainLayoutComponent implements OnInit {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: any) => {
-        const item = this.sidebarItems.find((x) => x.link === event.url);
-        if (item) {
-          this.layoutService.activeSidebar$.next(item);
-        }
+          this.layoutService.activeSidebar$.next(event.url+'');
       });
   }
 
@@ -58,10 +56,8 @@ export class MainLayoutComponent implements OnInit {
   }
 
   checkDeviceScreen() {
-    this.layoutService.currentScreenSize$.subscribe((type) => {
-      if (type) {
-        this.currentScreenSize = type;
-      }
+    this.layoutService.getCurrentScreenSize().subscribe((type) => {
+      this.currentScreenSize = type;
     });
 
     fromEvent(window, 'resize')

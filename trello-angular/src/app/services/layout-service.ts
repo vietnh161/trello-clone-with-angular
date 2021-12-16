@@ -1,16 +1,29 @@
 import { Injectable } from '@angular/core';
 import {
+  BehaviorSubject,
+  distinctUntilChanged,
+  Observable,
   Subject,
 } from 'rxjs';
-import { DeviceScreenType, SideBarItem } from '../models/comon-model';
+import { getDeviceScreenFromWindowWidth } from '../common/common-function';
+import { DeviceScreenType } from '../models/common-type';
+import { SideBarItem } from '../models/comon-model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LayoutService {
-  // innerWidth$: BehaviorSubject<number> = new BehaviorSubject<number>(window.innerWidth);
-  currentScreenSize$: Subject<DeviceScreenType> =
-    new Subject<DeviceScreenType>();
-  activeSidebar$: Subject<SideBarItem> = new Subject<SideBarItem>();
+  currentScreenSize$: BehaviorSubject<DeviceScreenType> =
+    new BehaviorSubject<DeviceScreenType>(
+      getDeviceScreenFromWindowWidth(window.innerWidth)
+    );
+
+  activeSidebar$: BehaviorSubject<string> = new BehaviorSubject<string>(
+    location.pathname
+  );
   constructor() {}
+
+  getCurrentScreenSize(): Observable<DeviceScreenType> {
+    return this.currentScreenSize$.pipe(distinctUntilChanged());
+  }
 }
